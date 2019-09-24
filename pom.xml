@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>pepper-boot-build</artifactId>
+    <name>${project.artifactId}</name>
+    <groupId>top.zrbcool</groupId>
+    <version>${revision}</version>
+    <description>${project.artifactId} of pepper-boot</description>
+    <packaging>pom</packaging>
+    <url>http://pepper-boot.zrbcool.top</url>
+    <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
+    </properties>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <modules>
+        <module>pepper-boot-project</module>
+    </modules>
+    <developers>
+        <developer>
+            <name>zrbcool</name>
+            <email>zhangrongbincool@163.com</email>
+            <organization>http://www.coohua.com</organization>
+            <organizationUrl>http://www.coohua.com</organizationUrl>
+        </developer>
+        <developer>
+            <name>Lord-X</name>
+            <email>xzm_rainbow@126.com</email>
+            <organization>http://www.coohua.com</organization>
+            <organizationUrl>http://www.coohua.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings
+                    only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.jetbrains.kotlin
+                                        </groupId>
+                                        <artifactId>
+                                            kotlin-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.1.51,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>compile</goal>
+                                            <goal>test-compile</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
