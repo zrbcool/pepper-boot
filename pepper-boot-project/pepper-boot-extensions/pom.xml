@@ -20,4 +20,10 @@
         <module>pepper-boot-jedis/pepper-boot-jedis-starter</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-boot</artifactId>
+        </dependency>
+    </dependencies>
 </project>
