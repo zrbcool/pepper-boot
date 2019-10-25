@@ -42,7 +42,7 @@ public class JedisClient extends Jedis {
         return false;
     }
 
-    public  boolean releaseDistributedLock(String lockKey, String requestId) {
+    public boolean releaseDistributedLock(String lockKey, String requestId) {
         try (Jedis jedis = jedisPool.getResource()){
             String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
             Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));

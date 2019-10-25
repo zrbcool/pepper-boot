@@ -10,6 +10,7 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.util.Assert;
 import redis.clients.jedis.JedisPoolConfig;
+import top.zrbcool.pepper.boot.core.CustomizedPropertiesBinder;
 
 /**
  * @author zhangrongbincool@163.com
@@ -22,7 +23,7 @@ public class JedisClientFactoryBean extends BaseJedisConfiguration
     private final Class[] ARGUMENT_TYPES = {String.class, JedisPoolConfig.class, String.class, int.class};
 
     @Autowired
-    protected CustomizedConfigurationPropertiesBinder binder;
+    protected CustomizedPropertiesBinder binder;
 
     @Override
     public JedisClient getObject() {

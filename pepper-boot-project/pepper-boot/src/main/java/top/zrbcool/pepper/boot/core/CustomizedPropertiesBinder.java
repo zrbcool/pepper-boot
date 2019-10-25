@@ -1,4 +1,4 @@
-package top.zrbcool.pepper.boot.jedis;
+package top.zrbcool.pepper.boot.core;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyEditorRegistry;
@@ -17,7 +17,7 @@ import org.springframework.core.env.PropertySources;
 
 import java.util.function.Consumer;
 
-public class CustomizedConfigurationPropertiesBinder implements ApplicationContextAware {
+public class CustomizedPropertiesBinder implements ApplicationContextAware {
 	private ConfigurableApplicationContext applicationContext;
 	private PropertySources propertySources;
 	private Binder binder;

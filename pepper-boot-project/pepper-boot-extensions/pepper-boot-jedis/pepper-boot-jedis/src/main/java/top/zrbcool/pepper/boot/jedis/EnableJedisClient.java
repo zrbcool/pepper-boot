@@ -13,4 +13,5 @@ import java.lang.annotation.*;
 @Import(JedisClientRegistrar.class)
 public @interface EnableJedisClient {
     String namespace() default "default";
+    String prefix() default "app.jedis";
 }

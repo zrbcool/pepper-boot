@@ -3,7 +3,8 @@ package top.zrbcool.pepper.boot.jedis;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * Created by zhangrongbin on 2018/10/10.
+ * @author zhangrongbincool@163.com
+ * @version 19-10-24
  */
 public class BaseJedisConfiguration {
     public static final String PREFIX_APP_JEDIS = "app.jedis";

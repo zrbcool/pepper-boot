@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import top.zrbcool.pepper.boot.jedis.CustomizedConfigurationPropertiesBinder;
 import top.zrbcool.pepper.boot.jedis.JedisAnnotationBean;
 
 /**
@@ -18,10 +17,6 @@ import top.zrbcool.pepper.boot.jedis.JedisAnnotationBean;
         JedisPoolConfig.class
 })
 public class JedisAutoConfiguration {
-    @Bean
-    public CustomizedConfigurationPropertiesBinder customizedConfigurationPropertiesBinder() {
-        return new CustomizedConfigurationPropertiesBinder();
-    }
 
     @Bean
     public JedisAnnotationBean jedisAnnotationBean() {

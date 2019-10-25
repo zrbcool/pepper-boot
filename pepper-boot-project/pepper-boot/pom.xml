@@ -15,4 +15,11 @@
     <packaging>jar</packaging>
     <url>http://pepper-boot.zrbcool.top</url>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

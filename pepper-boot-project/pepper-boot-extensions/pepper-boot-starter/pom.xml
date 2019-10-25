@@ -5,11 +5,11 @@
         <artifactId>pepper-boot-extensions</artifactId>
         <groupId>top.zrbcool</groupId>
         <version>${revision}</version>
-        <relativePath>../../</relativePath>
+        <relativePath>../</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>pepper-boot-jedis-starter</artifactId>
+    <artifactId>pepper-boot-starter</artifactId>
     <name>${project.artifactId}</name>
     <description>${project.artifactId} of pepper-boot</description>
     <packaging>jar</packaging>
@@ -21,16 +21,7 @@
         </dependency>
         <dependency>
             <groupId>top.zrbcool</groupId>
-            <artifactId>pepper-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>top.zrbcool</groupId>
-            <artifactId>pepper-boot-jedis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <optional>true</optional>
+            <artifactId>pepper-boot</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
  */
 public class JedisAnnotationBean implements BeanPostProcessor, BeanFactoryAware {
     private BeanFactory beanFactory;
-    private String[] annotationPackages = new String[]{"com.sample"};
+    private String[] annotationPackages = new String[]{""};
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -24,7 +24,6 @@ public class JedisAnnotationBean implements BeanPostProcessor, BeanFactoryAware 
         }
 
         Class<?> clazz = bean.getClass();
-
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             try {

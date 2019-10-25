@@ -16,6 +16,7 @@
     <url>http://pepper-boot.zrbcool.top</url>
 
     <modules>
+        <module>pepper-boot-starter</module>
         <module>pepper-boot-jedis/pepper-boot-jedis</module>
         <module>pepper-boot-jedis/pepper-boot-jedis-starter</module>
     </modules>

@@ -27,6 +27,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
@@ -39,6 +44,31 @@
                 <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-boot-jedis</artifactId>
                 <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-jedis-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.9</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib-nodep</artifactId>
+                <version>2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
