@@ -29,6 +29,7 @@ public class Application {
         @Override
         public void run(ApplicationArguments args) throws Exception {
             if (jedis != null) {
+                //b
                 System.out.println(jedis.set("hello", "pepper boot!"));
                 TimeUnit.SECONDS.sleep(1);
                 System.out.println(jedis.get("hello"));
