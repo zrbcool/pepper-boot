@@ -1,6 +1,7 @@
 package top.zrbcool.pepper.boot.jedis;
 
 import org.junit.Test;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -12,22 +13,9 @@ public class TestJedisClient {
     @Test
     public void test() {
         JedisPoolConfig config = new JedisPoolConfig();
-        config.setMaxTotal(300);
-        config.setMaxIdle(10);
-        config.setMinIdle(5);
-        config.setMaxWaitMillis(6000);
-        config.setTestOnBorrow(false);
-        config.setTestOnReturn(false);
-        config.setTestWhileIdle(true);
-        config.setTestOnCreate(false);
-        JedisPool jedisPool = new JedisPool(config, "192.168.100.221", 6379);
 
-        final Class[] argumentTypes = {JedisPool.class};
-        final Object[] arguments = {jedisPool};
-//        Enhancer enhancer = new Enhancer();
-//        enhancer.setSuperclass(JedisClient.class);
-//        enhancer.setCallback(new JedisClientMethodInterceptor());
-//        final JedisClient jedisClient = (JedisClient) enhancer.create(argumentTypes, arguments);
+        final Class[] argumentTypes = {String.class, JedisPoolConfig.class, String.class, int.class};
+        final Object[] arguments = {"default", config, "192.168.100.221", 6379};
 
         final JedisClient jedisClient = JedisClientProxyFactory.getProxy(argumentTypes, arguments);
         jedisClient.set("hello", "world");
@@ -38,6 +26,15 @@ public class TestJedisClient {
             final String functional = jedis.get("functional");
             result.setResult(functional);
         });
+
+        new JedisInternalScripts() {
+            @Override
+            public void script(Jedis jedis) {
+
+            }
+        };
         System.out.println(result.getResult());
     }
+
+
 }

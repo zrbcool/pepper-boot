@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import top.zrbcool.pepper.boot.jedis.CustomizedConfigurationPropertiesBinder;
 
 /**
  * @author zhangrongbincool@163.com
@@ -16,11 +17,8 @@ import redis.clients.jedis.JedisPoolConfig;
         JedisPoolConfig.class
 })
 public class JedisAutoConfiguration {
-    /**
-     * it just a sample!!!~
-     */
     @Bean
-    public Jedis sampleJedis() {
-        return new Jedis("192.168.100.221", 6379);
+    public CustomizedConfigurationPropertiesBinder customizedConfigurationPropertiesBinder() {
+        return new CustomizedConfigurationPropertiesBinder();
     }
 }

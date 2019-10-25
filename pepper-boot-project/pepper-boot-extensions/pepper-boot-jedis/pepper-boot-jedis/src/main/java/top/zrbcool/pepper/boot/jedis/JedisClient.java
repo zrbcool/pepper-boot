@@ -2,6 +2,7 @@ package top.zrbcool.pepper.boot.jedis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.Collections;
 
@@ -12,13 +13,23 @@ import java.util.Collections;
 public class JedisClient extends Jedis {
     private static final Long RELEASE_SUCCESS = 1L;
     private final JedisPool jedisPool;
-
-    public JedisClient(JedisPool jedisPool) {
-        this.jedisPool = jedisPool;
-    }
+    private final String namespace;
+//    private PjedisPool jedisPool;
+    private final JedisPoolConfig jedisPoolConfig;
+    private final String address;
+    private final int port;
 
     JedisPool getJedisPool() {
         return jedisPool;
+    }
+
+    public JedisClient(String namespace, JedisPoolConfig jedisPoolConfig, String address, int port) {
+        this.namespace = namespace;
+        this.jedisPoolConfig = jedisPoolConfig;
+        this.address = address;
+        this.port = port;
+//        JedisPropsHolder.NAMESPACE.set(namespace);
+        this.jedisPool = new JedisPool(jedisPoolConfig, address, port);
     }
 
     public boolean tryLock(String lockKey, String requestId, int expireTime) {
@@ -48,4 +59,15 @@ public class JedisClient extends Jedis {
         }
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
 }
