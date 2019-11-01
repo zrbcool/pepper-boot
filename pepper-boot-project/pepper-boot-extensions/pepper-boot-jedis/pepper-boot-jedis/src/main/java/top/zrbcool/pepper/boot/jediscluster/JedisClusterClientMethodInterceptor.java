@@ -25,7 +25,7 @@ public class JedisClusterClientMethodInterceptor implements MethodInterceptor {
         }
 
         if (!(obj instanceof JedisClusterClient)) return null;
-        final JedisCluster jedisCluster = ((JedisClusterClient) obj).getInternalJedisCluster();
+        final JedisCluster jedisCluster = ((JedisClusterClient) obj);
 
         return method.invoke(jedisCluster, args);
     }

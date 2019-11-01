@@ -1,6 +1,10 @@
 package top.zrbcool.pepper.boot.jediscluster;
 
+import com.pepper.metrics.core.extension.ExtensionLoader;
+import com.pepper.metrics.integration.jedis.JedisClusterProxyFactory;
+import com.pepper.metrics.integration.jedis.health.JedisClusterHealthTracker;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +12,29 @@ import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.util.Assert;
+import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisPropsHolder;
 import top.zrbcool.pepper.boot.core.CustomizedPropertiesBinder;
 import top.zrbcool.pepper.boot.jedis.BaseJedisConfiguration;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- * Created by zhangrongbin on 2018/10/10.
+ * @author zhangrongbincool@163.com
+ * @version 19-10-24
  */
 public class JedisClusterClientFactoryBean extends BaseJedisConfiguration
         implements FactoryBean<JedisClusterClient>, EnvironmentAware, BeanNameAware {
-    private final Class[] ARGUMENT_TYPES = {String.class, JedisPoolConfig.class, String.class};
+    private final Class[] ARGUMENT_TYPES = {
+            Set.class,
+            int.class,
+            int.class,
+            GenericObjectPoolConfig.class,
+            String.class,
+            String.class
+    };
     private Environment environment;
     private String beanName;
 
@@ -25,7 +42,7 @@ public class JedisClusterClientFactoryBean extends BaseJedisConfiguration
     protected CustomizedPropertiesBinder binder;
 
     @Override
-    public JedisClusterClient getObject() throws NoSuchFieldException {
+    public JedisClusterClient getObject() {
         String namespace = StringUtils.substringBefore(beanName, JedisClusterClient.class.getSimpleName());
 
         String addressKey = getPreFix() + "." + namespace + ".address";
@@ -37,9 +54,26 @@ public class JedisClusterClientFactoryBean extends BaseJedisConfiguration
         Bindable<?> target = Bindable.of(JedisPoolConfig.class).withExistingValue(jedisPoolConfig);
         binder.bind(getPreFix() + "." + namespace + ".pool", target);
 
-        final Object[] arguments = {namespace, jedisPoolConfig, address};
+        String[] commonClusterRedisArray = address.split(",");
+        Set<HostAndPort> jedisClusterNodes = new HashSet<>();
+        for (String clusterHostAndPort : commonClusterRedisArray) {
+            String host = clusterHostAndPort.split(":")[0].trim();
+            int port = Integer.parseInt(clusterHostAndPort.split(":")[1].trim());
+            jedisClusterNodes.add(new HostAndPort(host, port));
+        }
 
-        return JedisClusterClientProxyFactory.getProxy(ARGUMENT_TYPES, arguments);
+        JedisPropsHolder.NAMESPACE.set(namespace);
+        int defaultConnectTimeout = 2000;
+        int defaultConnectMaxAttempts = 20;
+
+        final Object[] arguments = {jedisClusterNodes, defaultConnectTimeout, defaultConnectMaxAttempts, jedisPoolConfig, namespace, address};
+
+        final JedisClusterClient jedisClusterClient = ExtensionLoader.getExtensionLoader(JedisClusterProxyFactory.class)
+                .getExtension("cglib")
+                .getProxy(JedisClusterClient.class, namespace, ARGUMENT_TYPES, arguments);
+        JedisClusterHealthTracker.addJedisCluster(namespace, jedisClusterClient);
+
+        return jedisClusterClient;
     }
 
     protected String getPreFix() {
