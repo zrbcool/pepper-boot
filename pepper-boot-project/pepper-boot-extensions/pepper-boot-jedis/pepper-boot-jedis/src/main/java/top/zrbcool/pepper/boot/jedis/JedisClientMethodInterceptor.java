@@ -3,7 +3,7 @@ package top.zrbcool.pepper.boot.jedis;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.PjedisPool;
 
 import java.lang.reflect.Method;
 
@@ -23,7 +23,7 @@ public class JedisClientMethodInterceptor implements MethodInterceptor {
         }
 
         if (!(obj instanceof JedisClient)) return null;
-        final JedisPool jedisPool = ((JedisClient) obj).getJedisPool();
+        final PjedisPool jedisPool = ((JedisClient) obj).getJedisPool();
 
         try (Jedis jedis = jedisPool.getResource()) {
             return method.invoke(jedis, args);

@@ -1,11 +1,15 @@
 package top.zrbcool.pepper.boot.jedis;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanInitializationException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 
 import java.lang.reflect.Field;
 
@@ -13,7 +17,8 @@ import java.lang.reflect.Field;
  * @author zhangrongbincool@163.com
  * @version 19-10-25
  */
-public class JedisAnnotationBean implements BeanPostProcessor, BeanFactoryAware {
+public class JedisClientAnnotationBean implements BeanPostProcessor, BeanFactoryAware, EnvironmentAware, InitializingBean {
+    private Environment environment;
     private BeanFactory beanFactory;
     private String[] annotationPackages = new String[]{""};
 
@@ -62,6 +67,14 @@ public class JedisAnnotationBean implements BeanPostProcessor, BeanFactoryAware 
         return false;
     }
 
+    public String[] getAnnotationPackages() {
+        return annotationPackages;
+    }
+
+    public void setAnnotationPackages(String[] annotationPackages) {
+        this.annotationPackages = annotationPackages;
+    }
+
     private Object refer(JedisClientRefer reference, Class<?> type) {
         return beanFactory.getBean(reference.namespace() + JedisClient.class.getSimpleName(), type);
     }
@@ -73,5 +86,16 @@ public class JedisAnnotationBean implements BeanPostProcessor, BeanFactoryAware 
 
     private boolean isProxyBean(Object bean) {
         return AopUtils.isAopProxy(bean);
+    }
+
+    @Override
+    public void afterPropertiesSet() {
+        final String temp = environment.getProperty("app.jedis.default.annotation.annotationPackages", "");
+        this.annotationPackages = StringUtils.split(temp, ',');
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

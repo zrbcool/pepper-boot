@@ -32,6 +32,18 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
         <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-ds-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-scheduled-printer</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import top.zrbcool.pepper.boot.jedis.JedisAnnotationBean;
+import top.zrbcool.pepper.boot.jedis.JedisClientAnnotationBean;
 
 /**
  * @author zhangrongbincool@163.com
@@ -19,7 +19,8 @@ import top.zrbcool.pepper.boot.jedis.JedisAnnotationBean;
 public class JedisAutoConfiguration {
 
     @Bean
-    public JedisAnnotationBean jedisAnnotationBean() {
-        return new JedisAnnotationBean();
+    public JedisClientAnnotationBean jedisAnnotationBean() {
+        return new JedisClientAnnotationBean();
     }
+
 }

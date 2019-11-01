@@ -17,6 +17,7 @@
     <properties>
         <spring.boot.version>2.1.7.RELEASE</spring.boot.version>
         <jedis.version>2.9.0</jedis.version>
+        <pepper.metrics.version>1.0.14</pepper.metrics.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -54,6 +55,23 @@
                 <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-boot-jedis-starter</artifactId>
                 <version>${revision}</version>
+            </dependency>
+
+            <!-- pepper-metrics dependency -->
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-metrics-jedis</artifactId>
+                <version>${pepper.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-metrics-ds-prometheus</artifactId>
+                <version>${pepper.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-metrics-scheduled-printer</artifactId>
+                <version>${pepper.metrics.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>

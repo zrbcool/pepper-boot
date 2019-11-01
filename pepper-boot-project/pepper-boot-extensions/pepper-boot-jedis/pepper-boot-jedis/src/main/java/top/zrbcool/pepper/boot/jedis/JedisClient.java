@@ -1,8 +1,10 @@
 package top.zrbcool.pepper.boot.jedis;
 
+import com.pepper.metrics.integration.jedis.health.JedisHealthTracker;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisPropsHolder;
+import redis.clients.jedis.PjedisPool;
 
 import java.util.Collections;
 
@@ -12,14 +14,13 @@ import java.util.Collections;
  */
 public class JedisClient extends Jedis {
     private static final Long RELEASE_SUCCESS = 1L;
-    private final JedisPool jedisPool;
     private final String namespace;
-//    private PjedisPool jedisPool;
+    private final PjedisPool jedisPool;
     private final JedisPoolConfig jedisPoolConfig;
     private final String address;
     private final int port;
 
-    JedisPool getJedisPool() {
+    PjedisPool getJedisPool() {
         return jedisPool;
     }
 
@@ -28,8 +29,9 @@ public class JedisClient extends Jedis {
         this.jedisPoolConfig = jedisPoolConfig;
         this.address = address;
         this.port = port;
-//        JedisPropsHolder.NAMESPACE.set(namespace);
-        this.jedisPool = new JedisPool(jedisPoolConfig, address, port);
+        JedisPropsHolder.NAMESPACE.set(namespace);
+        this.jedisPool = new PjedisPool(jedisPoolConfig, address, port);
+        JedisHealthTracker.addJedisPool(namespace, jedisPool);
     }
 
     public boolean tryLock(String lockKey, String requestId, int expireTime) {
@@ -69,5 +71,9 @@ public class JedisClient extends Jedis {
 
     public String getNamespace() {
         return namespace;
+    }
+
+    public JedisPoolConfig getJedisPoolConfig() {
+        return jedisPoolConfig;
     }
 }
