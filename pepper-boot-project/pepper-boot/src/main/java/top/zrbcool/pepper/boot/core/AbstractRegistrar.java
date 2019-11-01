@@ -8,7 +8,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * @author zhangrongbincool@163.com
  * @version 19-10-25
  */
-public abstract class BaseRegistrar {
+public abstract class AbstractRegistrar {
 
     protected void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry, String annotationName, String annotationsName) {
         boolean processed = false;

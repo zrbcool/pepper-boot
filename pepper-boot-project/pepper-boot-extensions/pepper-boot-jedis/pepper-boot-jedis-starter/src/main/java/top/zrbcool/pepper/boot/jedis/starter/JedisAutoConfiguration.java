@@ -6,6 +6,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import top.zrbcool.pepper.boot.jedis.JedisClientAnnotationBean;
+import top.zrbcool.pepper.boot.jediscluster.JedisClusterClientAnnotationBean;
 
 /**
  * @author zhangrongbincool@163.com
@@ -21,6 +22,11 @@ public class JedisAutoConfiguration {
     @Bean
     public JedisClientAnnotationBean jedisAnnotationBean() {
         return new JedisClientAnnotationBean();
+    }
+
+    @Bean
+    public JedisClusterClientAnnotationBean jedisClusterClientAnnotationBean() {
+        return new JedisClusterClientAnnotationBean();
     }
 
 }
