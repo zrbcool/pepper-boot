@@ -27,14 +27,6 @@ import java.util.Set;
  */
 public class JedisClusterClientFactoryBean extends BaseJedisConfiguration
         implements FactoryBean<JedisClusterClient>, EnvironmentAware, BeanNameAware {
-    private final Class[] ARGUMENT_TYPES = {
-            Set.class,
-            int.class,
-            int.class,
-            GenericObjectPoolConfig.class,
-            String.class,
-            String.class
-    };
     private Environment environment;
     private String beanName;
 
@@ -66,11 +58,19 @@ public class JedisClusterClientFactoryBean extends BaseJedisConfiguration
         int defaultConnectTimeout = 2000;
         int defaultConnectMaxAttempts = 20;
 
+        final Class[] argumentTypes = {
+                Set.class,
+                int.class,
+                int.class,
+                GenericObjectPoolConfig.class,
+                String.class,
+                String.class
+        };
         final Object[] arguments = {jedisClusterNodes, defaultConnectTimeout, defaultConnectMaxAttempts, jedisPoolConfig, namespace, address};
 
         final JedisClusterClient jedisClusterClient = ExtensionLoader.getExtensionLoader(JedisClusterProxyFactory.class)
                 .getExtension("cglib")
-                .getProxy(JedisClusterClient.class, namespace, ARGUMENT_TYPES, arguments);
+                .getProxy(JedisClusterClient.class, namespace, argumentTypes, arguments);
         JedisClusterHealthTracker.addJedisCluster(namespace, jedisClusterClient);
 
         return jedisClusterClient;

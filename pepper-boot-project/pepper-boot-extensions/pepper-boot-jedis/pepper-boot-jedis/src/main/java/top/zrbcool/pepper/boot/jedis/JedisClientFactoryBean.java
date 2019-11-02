@@ -20,7 +20,6 @@ public class JedisClientFactoryBean extends BaseJedisConfiguration
         implements FactoryBean<JedisClient>, EnvironmentAware, BeanNameAware {
     private Environment environment;
     private String beanName;
-    private final Class[] ARGUMENT_TYPES = {String.class, JedisPoolConfig.class, String.class, int.class};
 
     @Autowired
     protected CustomizedPropertiesBinder binder;
@@ -41,11 +40,10 @@ public class JedisClientFactoryBean extends BaseJedisConfiguration
         Bindable<?> target = Bindable.of(JedisPoolConfig.class).withExistingValue(jedisPoolConfig);
         binder.bind(getPreFix() + "." + namespace + ".pool", target);
 
+        final Class[] argumentTypes = {String.class, JedisPoolConfig.class, String.class, int.class};
         final Object[] arguments = {namespace, jedisPoolConfig, address, Integer.parseInt(port)};
 
-//        PjedisPool jedisPool = jedisClient.getJedisPool();
-//        JedisHealthTracker.addJedisPool(namespace, jedisPool);
-        return JedisClientProxyFactory.getProxy(ARGUMENT_TYPES, arguments);
+        return JedisClientProxyFactory.getProxy(argumentTypes, arguments);
     }
 
     protected String getPreFix() {
