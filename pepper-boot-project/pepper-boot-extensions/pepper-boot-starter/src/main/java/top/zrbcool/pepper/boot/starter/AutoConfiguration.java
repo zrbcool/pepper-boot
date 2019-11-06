@@ -13,7 +13,7 @@ import top.zrbcool.pepper.boot.core.CustomizedPropertiesBinder;
 })
 public class AutoConfiguration {
     @Bean
-    public CustomizedPropertiesBinder customizedConfigurationPropertiesBinder() {
+    public CustomizedPropertiesBinder customizedPropertiesBinder() {
         return new CustomizedPropertiesBinder();
     }
 

@@ -1,11 +1,20 @@
 package top.zrbcool.pepper.boot.jedis;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.pepper.metrics.integration.jedis.health.JedisHealthTracker;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.ReflectionUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisPropsHolder;
 import redis.clients.jedis.PjedisPool;
+import redis.clients.util.Pool;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 
 /**
@@ -13,6 +22,7 @@ import java.util.Collections;
  * @version 19-10-24
  */
 public class JedisClient extends Jedis {
+    private static final Logger log = LoggerFactory.getLogger(JedisClient.class);
     private static final Long RELEASE_SUCCESS = 1L;
     private final String namespace;
     private final PjedisPool jedisPool;
@@ -32,6 +42,37 @@ public class JedisClient extends Jedis {
         JedisPropsHolder.NAMESPACE.set(namespace);
         this.jedisPool = new PjedisPool(jedisPoolConfig, address, port);
         JedisHealthTracker.addJedisPool(namespace, jedisPool);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void warmUp() {
+        Field field;
+        try {
+            field = Pool.class.getDeclaredField("internalPool");
+            field.setAccessible(true);
+            GenericObjectPool internalPool = (GenericObjectPool) ReflectionUtils.getField(field, jedisPool);
+            if (internalPool != null) {
+                internalPool.preparePool();
+            }
+        } catch (Exception e) {
+            log.error("error when warmUp()! ", e);
+        }
+    }
+
+    public boolean setCache(String key, Object obj) {
+        return StringUtils.equals("OK", set(key, JSON.toJSONString(obj)));
+    }
+
+    public boolean setCache(String key, Object obj, int timeout) {
+        return StringUtils.equals("OK", setex(key, timeout, JSON.toJSONString(obj)));
+    }
+
+    public <T> T getCache(String key, TypeReference<T> typeReference) {
+        String value = get(key);
+        if (StringUtils.isEmpty(value)) {
+            return null;
+        }
+        return JSON.parseObject(value, typeReference);
     }
 
     public boolean tryLock(String lockKey, String requestId, int expireTime) {
