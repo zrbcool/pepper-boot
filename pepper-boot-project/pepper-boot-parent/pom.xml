@@ -10,21 +10,7 @@
 	<artifactId>pepper-boot-parent</artifactId>
 	<name>${project.artifactId}</name>
 	<description>${project.artifactId} of pepper-boot</description>
-	<version>${revision}</version>
 	<packaging>pom</packaging>
 
-	<properties>
-		<spring.boot.version>2.1.7.RELEASE</spring.boot.version>
-	</properties>
 
-
-	<dependencyManagement>
-		<dependencies>
-		</dependencies>
-	</dependencyManagement>
-
-	<build>
-		<plugins>
-		</plugins>
-	</build>
 </project>
