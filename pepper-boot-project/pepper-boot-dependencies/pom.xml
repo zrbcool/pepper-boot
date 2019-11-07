@@ -18,9 +18,61 @@
         <spring.boot.version>2.1.7.RELEASE</spring.boot.version>
         <jedis.version>2.9.0</jedis.version>
         <pepper.metrics.version>1.0.14</pepper.metrics.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <cglib-nodep.version>2.2</cglib-nodep.version>
+        <junit.version>4.12</junit.version>
+        <com.weibo.motan>1.1.1</com.weibo.motan>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.weibo</groupId>
+                <artifactId>motan-core</artifactId>
+                <version>${com.weibo.motan}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>slf4j-api</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.weibo</groupId>
+                <artifactId>motan-transport-netty</artifactId>
+                <version>${com.weibo.motan}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.weibo</groupId>
+                <artifactId>motan-springsupport</artifactId>
+                <version>${com.weibo.motan}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.weibo</groupId>
+                <artifactId>motan-registry-zookeeper</artifactId>
+                <version>${com.weibo.motan}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
@@ -36,14 +88,10 @@
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+            <!-- pepper-boot dependency -->
             <dependency>
                 <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-boot</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>top.zrbcool</groupId>
-                <artifactId>pepper-boot-jedis</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -53,14 +101,33 @@
             </dependency>
             <dependency>
                 <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-jedis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-boot-jedis-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
-
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-motan</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-motan-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <!-- pepper-metrics dependency -->
             <dependency>
                 <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-metrics-jedis</artifactId>
+                <version>${pepper.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-metrics-motan</artifactId>
                 <version>${pepper.metrics.version}</version>
             </dependency>
             <dependency>
@@ -76,17 +143,17 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.9</version>
+                <version>${commons-lang3.version}</version>
             </dependency>
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib-nodep</artifactId>
-                <version>2.2</version>
+                <version>${cglib-nodep.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>${junit.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

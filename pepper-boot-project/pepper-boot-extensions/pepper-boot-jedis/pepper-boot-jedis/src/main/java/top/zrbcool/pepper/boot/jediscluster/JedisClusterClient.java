@@ -27,14 +27,14 @@ public class JedisClusterClient extends JedisCluster {
     private final GenericObjectPoolConfig poolConfig;
     private final Map<String, JedisPool> nodes;
     private final int connectTimeout;
-    private final int connectMaxAttemps;
+    private final int connectMaxAttempts;
 
     public JedisClusterClient(Set<HostAndPort> jedisClusterNode, int timeout, int maxAttempts, GenericObjectPoolConfig poolConfig, String namespace, String address) throws NoSuchFieldException {
         super(jedisClusterNode, timeout, maxAttempts, poolConfig);
         this.namespace = namespace;
         this.address = address;
         this.poolConfig = poolConfig;
-        this.connectMaxAttemps = maxAttempts;
+        this.connectMaxAttempts = maxAttempts;
         this.connectTimeout = timeout;
         Field cacheFiled = JedisClusterConnectionHandler.class.getDeclaredField("cache");
         cacheFiled.setAccessible(true);
@@ -42,26 +42,6 @@ public class JedisClusterClient extends JedisCluster {
         assert cache != null;
         nodes = cache.getNodes();
     }
-
-//    public JedisClusterClient(String namespace, JedisPoolConfig jedisPoolConfig, String address) {
-//        this.namespace = namespace;
-//        this.jedisPoolConfig = jedisPoolConfig;
-//        this.address = address;
-//
-//        String[] commonClusterRedisArray = address.split(",");
-//        Set<HostAndPort> jedisClusterNodes = new HashSet<>();
-//        for (String clusterHostAndPort : commonClusterRedisArray) {
-//            String host = clusterHostAndPort.split(":")[0].trim();
-//            int port = Integer.parseInt(clusterHostAndPort.split(":")[1].trim());
-//            jedisClusterNodes.add(new HostAndPort(host, port));
-//        }
-//
-//        JedisPropsHolder.NAMESPACE.set(namespace);
-//        int defaultConnectTimeout = 2000;
-//        int defaultConnectMaxAttempts = 20;
-//        this.internalJedisCluster = PjedisClusterFactory.newJedisCluster(jedisClusterNodes, defaultConnectTimeout, defaultConnectMaxAttempts, jedisPoolConfig);
-//
-//    }
 
     public void warmUp() {
         try {
@@ -122,7 +102,7 @@ public class JedisClusterClient extends JedisCluster {
         return connectTimeout;
     }
 
-    public int getConnectMaxAttemps() {
-        return connectMaxAttemps;
+    public int getConnectMaxAttempts() {
+        return connectMaxAttempts;
     }
 }

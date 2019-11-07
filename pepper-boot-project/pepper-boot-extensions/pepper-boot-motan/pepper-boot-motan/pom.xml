@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>pepper-boot-extensions</artifactId>
+        <groupId>top.zrbcool</groupId>
+        <version>${revision}</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>pepper-boot-motan</artifactId>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId} of pepper-boot</description>
+    <packaging>jar</packaging>
+    <url>http://pepper-boot.zrbcool.top</url>
+    <dependencies>
+        <!-- motan -->
+        <dependency>
+            <groupId>com.weibo</groupId>
+            <artifactId>motan-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.weibo</groupId>
+            <artifactId>motan-transport-netty</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.weibo</groupId>
+            <artifactId>motan-springsupport</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.weibo</groupId>
+            <artifactId>motan-registry-zookeeper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-motan</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-ds-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-scheduled-printer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

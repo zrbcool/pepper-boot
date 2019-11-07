@@ -2,31 +2,30 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>pepper-boot-parent</artifactId>
+        <artifactId>pepper-boot-extensions</artifactId>
         <groupId>top.zrbcool</groupId>
         <version>${revision}</version>
-        <relativePath>../pepper-boot-parent</relativePath>
+        <relativePath>../../</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>pepper-boot-extensions</artifactId>
+    <artifactId>pepper-boot-motan-starter</artifactId>
     <name>${project.artifactId}</name>
     <description>${project.artifactId} of pepper-boot</description>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <url>http://pepper-boot.zrbcool.top</url>
-
-    <modules>
-        <module>pepper-boot-starter</module>
-        <module>pepper-boot-jedis/pepper-boot-jedis</module>
-        <module>pepper-boot-jedis/pepper-boot-jedis-starter</module>
-        <module>pepper-boot-motan/pepper-boot-motan</module>
-        <module>pepper-boot-motan/pepper-boot-motan-starter</module>
-    </modules>
-
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
             <groupId>top.zrbcool</groupId>
-            <artifactId>pepper-boot</artifactId>
+            <artifactId>pepper-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-boot-motan</artifactId>
         </dependency>
     </dependencies>
 </project>
