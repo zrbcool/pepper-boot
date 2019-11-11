@@ -17,7 +17,7 @@
     <properties>
         <spring.boot.version>2.1.7.RELEASE</spring.boot.version>
         <jedis.version>2.9.0</jedis.version>
-        <pepper.metrics.version>1.0.14</pepper.metrics.version>
+        <pepper.metrics.version>1.0.15</pepper.metrics.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <cglib-nodep.version>2.2</cglib-nodep.version>
         <junit.version>4.12</junit.version>
@@ -88,6 +88,11 @@
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
             <!-- pepper-boot dependency -->
             <dependency>
                 <groupId>top.zrbcool</groupId>
@@ -154,6 +159,21 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.26</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>2.12.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-core</artifactId>
+                <version>1.5.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

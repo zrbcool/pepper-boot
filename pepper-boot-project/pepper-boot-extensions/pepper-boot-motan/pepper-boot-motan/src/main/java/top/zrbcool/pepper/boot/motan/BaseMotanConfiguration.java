@@ -1,6 +1,16 @@
 package top.zrbcool.pepper.boot.motan;
 
-import com.weibo.api.motan.config.springsupport.*;
+import com.pepper.metrics.core.extension.ExtensionLoader;
+import com.weibo.api.motan.config.springsupport.BasicRefererConfigBean;
+import com.weibo.api.motan.config.springsupport.BasicServiceConfigBean;
+import com.weibo.api.motan.config.springsupport.ProtocolConfigBean;
+import com.weibo.api.motan.config.springsupport.RegistryConfigBean;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.util.StringUtils;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author zhangrongbincool@163.com
@@ -9,12 +19,29 @@ import com.weibo.api.motan.config.springsupport.*;
 public class BaseMotanConfiguration {
 
     public static final String PREFIX_APP_MOTAN = "app.motan";
+    private static final Set<String> FILTER_SET = new HashSet<>();
+
+    static {
+        FILTER_SET.add("pepperProfiler");
+        final List<MotanExtRegister> extensions = ExtensionLoader.getExtensionLoader(MotanExtRegister.class).getExtensions();
+        for (MotanExtRegister extension : extensions) {
+            FILTER_SET.add(extension.name());
+        }
+    }
+
+    public static void addFilter(String filterName) {
+        FILTER_SET.add(filterName);
+    }
 
     protected void initProtocolConfig(ProtocolConfigBean config) {
         config.setName("motan");
         config.setMinWorkerThread(20);
         config.setMaxWorkerThread(200);
-        config.setFilter("cafTracing,pepperProfiler,sentinelProfiler");
+        if (CollectionUtils.isNotEmpty(FILTER_SET)) {
+            final String temp = StringUtils.arrayToCommaDelimitedString(FILTER_SET.toArray());
+            config.setFilter(temp);
+        }
+//        config.setFilter("cafTracing,pepperProfiler,sentinelProfiler");
         config.setHaStrategy("failover");
     }
 
@@ -44,6 +71,24 @@ public class BaseMotanConfiguration {
         config.setRegistry(defaultRegistry);
         config.setRegistry(defaultRegistry.getId());
         config.setRequestTimeout(20000);
+    }
+
+    public static void main(String[] args) {
+        Set<String> set = new HashSet<>();
+        set.add("a");
+        set.add("b");
+        set.add("c");
+
+        System.out.println(StringUtils.arrayToCommaDelimitedString(set.toArray()));
+
+        set = new HashSet<>();
+        set.add("c");
+
+        System.out.println(StringUtils.arrayToCommaDelimitedString(set.toArray()));
+
+        set = new HashSet<>();
+
+        System.out.println(StringUtils.arrayToCommaDelimitedString(set.toArray()));
     }
 
 }

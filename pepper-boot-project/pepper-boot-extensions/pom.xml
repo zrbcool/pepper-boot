@@ -20,6 +20,8 @@
         <module>pepper-boot-jedis/pepper-boot-jedis</module>
         <module>pepper-boot-jedis/pepper-boot-jedis-starter</module>
         <module>pepper-boot-motan/pepper-boot-motan</module>
+        <module>pepper-boot-motan/pepper-boot-motan-ext-log4j2</module>
+        <module>pepper-boot-motan/pepper-boot-motan-ext-sentinel</module>
         <module>pepper-boot-motan/pepper-boot-motan-starter</module>
     </modules>
 
