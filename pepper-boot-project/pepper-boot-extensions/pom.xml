@@ -23,6 +23,8 @@
         <module>pepper-boot-motan/pepper-boot-motan-ext-log4j2</module>
         <module>pepper-boot-motan/pepper-boot-motan-ext-sentinel</module>
         <module>pepper-boot-motan/pepper-boot-motan-starter</module>
+        <module>pepper-boot-mybatis/pepper-boot-mybatis</module>
+        <module>pepper-boot-mybatis/pepper-boot-mybatis-starter</module>
     </modules>
 
     <dependencies>
