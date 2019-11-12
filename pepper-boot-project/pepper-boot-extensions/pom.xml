@@ -25,6 +25,8 @@
         <module>pepper-boot-motan/pepper-boot-motan-starter</module>
         <module>pepper-boot-mybatis/pepper-boot-mybatis</module>
         <module>pepper-boot-mybatis/pepper-boot-mybatis-starter</module>
+        <module>pepper-boot-sentinel/pepper-boot-sentinel</module>
+        <module>pepper-boot-sentinel/pepper-boot-sentinel-starter</module>
     </modules>
 
     <dependencies>

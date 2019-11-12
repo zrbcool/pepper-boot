@@ -121,6 +121,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
@@ -138,6 +143,16 @@
             <dependency>
                 <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-boot-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-sentinel</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-sentinel-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -229,6 +244,26 @@
             <dependency>
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-core</artifactId>
+                <version>1.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-web-servlet</artifactId>
+                <version>1.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-transport-common</artifactId>
+                <version>1.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-annotation-aspectj</artifactId>
+                <version>1.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-transport-simple-http</artifactId>
                 <version>1.5.2</version>
             </dependency>
         </dependencies>

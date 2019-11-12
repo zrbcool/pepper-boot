@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+top.zrbcool.pepper.boot.sentinel.starter.SentinelAutoConfiguration
