@@ -28,8 +28,8 @@
             <artifactId>pepper-boot-jedis</artifactId>
         </dependency>
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

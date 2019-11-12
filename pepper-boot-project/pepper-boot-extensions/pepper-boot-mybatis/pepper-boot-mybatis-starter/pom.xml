@@ -27,5 +27,10 @@
             <groupId>top.zrbcool</groupId>
             <artifactId>pepper-boot-mybatis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 </project>

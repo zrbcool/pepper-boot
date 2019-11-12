@@ -10,7 +10,6 @@ public class Log4j2Utils {
     public static final String CONTEXT_COLUMN_1 = "column1";
     public static final String CONTEXT_COLUMN_2 = "column2";
     public static final String LINE = StringUtils.repeat("-", 150);
-    public static final String CONFIG_PREFIX = "** PEPPER BOOT CONFIG - ";
 
     public static void putContextColumn1(String value) {
         ThreadContext.put(CONTEXT_COLUMN_1, value);
