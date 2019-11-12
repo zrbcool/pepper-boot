@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>pepper-boot-extensions</artifactId>
+        <groupId>top.zrbcool</groupId>
+        <version>${revision}</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>pepper-boot-profiler-starter</artifactId>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId} of pepper-boot</description>
+    <packaging>jar</packaging>
+    <url>http://pepper-boot.zrbcool.top</url>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-custom</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+</project>
