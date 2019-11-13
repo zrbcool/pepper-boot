@@ -195,6 +195,16 @@
                 <artifactId>pepper-boot-httpclient-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-asynchttpclient</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-asynchttpclient-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <!-- pepper-metrics dependency -->
             <dependency>
                 <groupId>top.zrbcool</groupId>

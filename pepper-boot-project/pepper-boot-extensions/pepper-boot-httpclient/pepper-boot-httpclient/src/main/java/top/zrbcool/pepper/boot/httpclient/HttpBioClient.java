@@ -85,7 +85,7 @@ public class HttpBioClient extends CloseableHttpClient implements DisposableBean
 //                .tag("chttpbioclient")
 //                .create();
         CHTTPCLIENT_STAT = Profiler.Builder.builder()
-                .type("httpclient-req")
+                .type("httpbioclient-req")
                 .subType("out")
                 .namespace(namespace)
                 .build();
@@ -95,7 +95,7 @@ public class HttpBioClient extends CloseableHttpClient implements DisposableBean
 //                .tag("http:outgoing")
 //                .create();
         HTTP_STAT = Profiler.Builder.builder()
-                .type("httpclient-http")
+                .type("httpbioclient-http")
                 .subType("out")
                 .namespace(namespace)
                 .build();

@@ -19,6 +19,8 @@
         <module>pepper-boot-starter</module>
         <module>pepper-boot-httpclient/pepper-boot-httpclient</module>
         <module>pepper-boot-httpclient/pepper-boot-httpclient-starter</module>
+        <module>pepper-boot-asynchttpclient/pepper-boot-asynchttpclient</module>
+        <module>pepper-boot-asynchttpclient/pepper-boot-asynchttpclient-starter</module>
         <module>pepper-boot-jedis/pepper-boot-jedis</module>
         <module>pepper-boot-jedis/pepper-boot-jedis-starter</module>
         <module>pepper-boot-motan/pepper-boot-motan</module>

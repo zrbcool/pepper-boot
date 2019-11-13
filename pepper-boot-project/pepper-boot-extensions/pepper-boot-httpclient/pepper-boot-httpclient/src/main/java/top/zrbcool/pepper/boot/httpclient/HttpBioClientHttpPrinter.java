@@ -19,7 +19,7 @@ public class HttpBioClientHttpPrinter extends AbstractPerfPrinter implements Per
     public List<Stats> chooseStats(Set<Stats> statsSet) {
         List<Stats> statsList = new ArrayList<>();
         for (Stats stats : statsSet) {
-            if ("httpclient-http".equalsIgnoreCase(stats.getType()) &&
+            if ("httpbioclient-http".equalsIgnoreCase(stats.getType()) &&
                 "out".equalsIgnoreCase(stats.getSubType())) {
                 statsList.add(stats);
             }
@@ -29,6 +29,6 @@ public class HttpBioClientHttpPrinter extends AbstractPerfPrinter implements Per
 
     @Override
     public String setPrefix(Stats stats) {
-        return "perf-http:outgoing";
+        return "perf-httpbio:outgoing";
     }
 }
