@@ -26,9 +26,16 @@
         <mybatis.version>3.4.5</mybatis.version>
         <mybatis-spring.version>1.3.2</mybatis-spring.version>
         <druid.version>1.1.19</druid.version>
+        <rocketmq.client.version>4.3.2</rocketmq.client.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!-- rocketmq -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq.client.version}</version>
+            </dependency>
             <!-- mybatis -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -203,6 +210,26 @@
             <dependency>
                 <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-boot-asynchttpclient-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-kafka</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-kafka-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-rocketmq</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-boot-rocketmq-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <!-- pepper-metrics dependency -->

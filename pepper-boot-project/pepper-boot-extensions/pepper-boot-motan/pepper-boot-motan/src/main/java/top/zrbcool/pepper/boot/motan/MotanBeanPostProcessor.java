@@ -27,7 +27,6 @@ public class MotanBeanPostProcessor extends BaseMotanConfiguration implements Be
     private BeanFactory beanFactory;
 
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-
         if (bean instanceof AnnotationBean) {
 //            String namespace = StringUtils.substringBefore(beanName, AnnotationBean.class.getSimpleName());
 //

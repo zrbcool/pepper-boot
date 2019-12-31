@@ -32,6 +32,10 @@
         <module>pepper-boot-sentinel/pepper-boot-sentinel</module>
         <module>pepper-boot-sentinel/pepper-boot-sentinel-starter</module>
         <module>pepper-boot-profiler/pepper-boot-profiler-starter</module>
+        <module>pepper-boot-kafka/pepper-boot-kafka</module>
+        <module>pepper-boot-kafka/pepper-boot-kafka-starter</module>
+        <module>pepper-boot-rocketmq/pepper-boot-rocketmq</module>
+        <module>pepper-boot-rocketmq/pepper-boot-rocketmq-starter</module>
     </modules>
 
     <dependencies>

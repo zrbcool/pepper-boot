@@ -31,6 +31,16 @@ public class BeanRegistrationUtil {
                 AbstractBeanDefinition.AUTOWIRE_BY_NAME);
     }
 
+    public static boolean registerBeanDefinitionIfBeanNameNotExists(BeanDefinitionRegistry registry, String beanName,
+                                                                    Map<String, Object> extraPropertyValues,
+                                                                    Class<?> beanClass) {
+        return registerBeanDefinitionIfNotExists(
+                registry, beanName,
+                beanClass, extraPropertyValues,
+                false, true,
+                AbstractBeanDefinition.AUTOWIRE_BY_NAME);
+    }
+
     public static boolean registerBeanDefinitionIfNotExists(
             BeanDefinitionRegistry registry,
             String beanName,

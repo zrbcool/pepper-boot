@@ -26,6 +26,7 @@
     </licenses>
     <modules>
         <module>pepper-boot-project</module>
+        <module>pepper-boot-samples</module>
     </modules>
     <developers>
         <developer>
