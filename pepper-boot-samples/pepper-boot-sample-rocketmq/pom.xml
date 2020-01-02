@@ -22,7 +22,7 @@
         <dependency>
             <groupId>top.zrbcool</groupId>
             <artifactId>pepper-boot-rocketmq-starter</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

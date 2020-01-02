@@ -1,8 +1,8 @@
 package top.zrbcool.pepper.boot.rocketmq.consumer;
 
-import com.pepper.metrics.integration.rocketmq.RocketMQHealthTracker;
+import com.pepper.metrics.integration.rocketmq.health.RocketMQHealthTracker;
+import com.pepper.metrics.integration.rocketmq.perf.ConsumerConsumeMessageHook;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.common.protocol.body.ConsumerRunningInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanNameAware;
@@ -53,6 +53,7 @@ public class RocketMQConsumerFactoryBean implements FactoryBean<EnhancedDefaultM
          */
         defaultMQPushConsumer = new EnhancedDefaultMQPushConsumer();
         defaultMQPushConsumer.setNamespace(namespace);
+        defaultMQPushConsumer.getDefaultMQPushConsumerImpl().registerConsumeMessageHook(new ConsumerConsumeMessageHook(namespace));
         // bind default params
         Bindable<?> target = Bindable.of(DefaultMQPushConsumer.class).withExistingValue(defaultMQPushConsumer);
         binder.bind(getPreFix(), target);

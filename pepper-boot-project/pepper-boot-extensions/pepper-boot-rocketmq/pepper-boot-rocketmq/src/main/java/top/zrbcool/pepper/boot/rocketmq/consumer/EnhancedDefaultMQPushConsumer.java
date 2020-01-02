@@ -1,11 +1,7 @@
 package top.zrbcool.pepper.boot.rocketmq.consumer;
 
-import com.pepper.metrics.integration.rocketmq.proxy.MessageListenerConcurrentlyProxy;
-import com.pepper.metrics.integration.rocketmq.proxy.MessageListenerOrderlyProxy;
+import com.pepper.metrics.integration.rocketmq.perf.ConsumerConsumeMessageHook;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.MessageListener;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQClientException;
 
 /**
@@ -39,14 +35,6 @@ public class EnhancedDefaultMQPushConsumer extends DefaultMQPushConsumer {
 
     @Override
     public void start() throws MQClientException {
-        final MessageListener messageListener = getMessageListener();
-        if (messageListener instanceof MessageListenerConcurrently) {
-            super.setMessageListener(new MessageListenerConcurrentlyProxy(namespace, getConsumerGroup(), (MessageListenerConcurrently) messageListener));
-        } else if (messageListener instanceof MessageListenerOrderly) {
-            super.setMessageListener(new MessageListenerOrderlyProxy(namespace, getConsumerGroup(), (MessageListenerOrderly) messageListener));
-        } else {
-            super.setMessageListener(messageListener);
-        }
         super.start();
     }
 }

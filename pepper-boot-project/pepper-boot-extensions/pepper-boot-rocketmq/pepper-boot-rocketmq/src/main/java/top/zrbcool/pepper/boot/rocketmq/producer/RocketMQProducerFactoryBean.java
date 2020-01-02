@@ -1,9 +1,7 @@
 package top.zrbcool.pepper.boot.rocketmq.producer;
 
-import com.pepper.metrics.core.extension.ExtensionLoader;
-import com.pepper.metrics.integration.rocketmq.DefaultMQProducerProxyFactory;
+import com.pepper.metrics.integration.rocketmq.perf.ProducerSendMessageHook;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
@@ -43,11 +41,13 @@ public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultM
          * caf.mq.rocketmq.producer.vipChannelEnabled = true
          */
 
-        defaultMQProducer = ExtensionLoader.getExtensionLoader(DefaultMQProducerProxyFactory.class)
-                .getExtension("cglib")
-                .getProxy(EnhancedDefaultMQProducer.class, namespace);
+//        defaultMQProducer = ExtensionLoader.getExtensionLoader(DefaultMQProducerProxyFactory.class)
+//                .getExtension("cglib")
+//                .getProxy(EnhancedDefaultMQProducer.class, namespace);
+        defaultMQProducer = new EnhancedDefaultMQProducer();
         defaultMQProducer.setNamespace(namespace);
         defaultMQProducer.setProducerGroup(producerGroup);
+        defaultMQProducer.getDefaultMQProducerImpl().registerSendMessageHook(new ProducerSendMessageHook(namespace));
         Bindable<?> target = Bindable.of(EnhancedDefaultMQProducer.class).withExistingValue(defaultMQProducer);
         // bind default params
         binder.bind(getPreFix(), target);
