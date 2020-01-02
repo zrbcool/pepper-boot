@@ -29,7 +29,7 @@ public class SampleConsumer {
             consumer.setConsumerGroup("default");
             consumer.setMessageListener((MessageListenerConcurrently) (msgs, context) -> {
                 for (MessageExt msg : msgs) {
-                    log.info("msg: {}", msg.toString());
+//                    log.info("msg: {}", msg.toString());
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });

@@ -24,6 +24,10 @@
             <artifactId>pepper-metrics-scheduled-printer</artifactId>
         </dependency>
         <dependency>
+            <groupId>top.zrbcool</groupId>
+            <artifactId>pepper-metrics-rocketmq</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
         </dependency>

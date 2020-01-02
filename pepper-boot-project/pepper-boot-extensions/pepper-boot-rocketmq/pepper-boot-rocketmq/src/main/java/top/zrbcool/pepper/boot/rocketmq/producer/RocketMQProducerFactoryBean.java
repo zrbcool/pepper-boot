@@ -1,14 +1,14 @@
 package top.zrbcool.pepper.boot.rocketmq.producer;
 
+import com.pepper.metrics.core.extension.ExtensionLoader;
+import com.pepper.metrics.integration.rocketmq.DefaultMQProducerProxyFactory;
 import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.Bindable;
-import org.springframework.context.EnvironmentAware;
-import org.springframework.core.env.Environment;
 import top.zrbcool.pepper.boot.core.CustomizedPropertiesBinder;
 import top.zrbcool.pepper.boot.rocketmq.Constants;
 
@@ -16,12 +16,11 @@ import top.zrbcool.pepper.boot.rocketmq.Constants;
  * @author zhangrongbincool@163.com
  * @version 19-12-30
  */
-public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultMQProducer>, EnvironmentAware, BeanNameAware {
+public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultMQProducer> {
     private static final Logger log = LoggerFactory.getLogger(EnhancedDefaultMQProducer.class);
-    private Environment environment;
-    private String beanName;
     private String producerGroup;
     private String namespace;
+    private EnhancedDefaultMQProducer defaultMQProducer;
 
     @Autowired
     protected CustomizedPropertiesBinder binder;
@@ -44,7 +43,9 @@ public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultM
          * caf.mq.rocketmq.producer.vipChannelEnabled = true
          */
 
-        EnhancedDefaultMQProducer defaultMQProducer = new EnhancedDefaultMQProducer();
+        defaultMQProducer = ExtensionLoader.getExtensionLoader(DefaultMQProducerProxyFactory.class)
+                .getExtension("cglib")
+                .getProxy(EnhancedDefaultMQProducer.class, namespace);
         defaultMQProducer.setNamespace(namespace);
         defaultMQProducer.setProducerGroup(producerGroup);
         Bindable<?> target = Bindable.of(EnhancedDefaultMQProducer.class).withExistingValue(defaultMQProducer);
@@ -58,10 +59,20 @@ public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultM
          */
         try {
             defaultMQProducer.start();
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    defaultMQProducer.shutdown();
+                    log.info("rocketmq - [{}] producer has shutdown gracefully!", namespace);
+                } catch (Exception e) {
+                    log.error("error occurred during rocketmq producer shutdown! pls check! ", e);
+                }
+            }));
+            log.info("rocketmq producer shutdown hook added!");
         } catch (MQClientException e) {
             log.error("", e);
             throw e;
         }
+
         return defaultMQProducer;
     }
 
@@ -74,15 +85,6 @@ public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultM
         return EnhancedDefaultMQProducer.class;
     }
 
-    @Override
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
-
-    @Override
-    public void setBeanName(String name) {
-        this.beanName = name;
-    }
 
     public String getProducerGroup() {
         return producerGroup;
@@ -98,5 +100,14 @@ public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultM
 
     public void setNamespace(String namespace) {
         this.namespace = namespace;
+    }
+
+    public void destroy() {
+        try {
+            defaultMQProducer.shutdown();
+            log.info("rocketmq - {} consumer has shutdown gracefully!", namespace);
+        } catch (Exception e) {
+            log.error("", e);
+        }
     }
 }
