@@ -2,12 +2,11 @@ package top.zrbcool.pepper.boot.rocketmq.producer;
 
 import com.pepper.metrics.integration.rocketmq.perf.ProducerSendMessageHook;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.Bindable;
 import top.zrbcool.pepper.boot.core.CustomizedPropertiesBinder;
+import top.zrbcool.pepper.boot.core.Loggers;
 import top.zrbcool.pepper.boot.rocketmq.Constants;
 
 /**
@@ -15,7 +14,6 @@ import top.zrbcool.pepper.boot.rocketmq.Constants;
  * @version 19-12-30
  */
 public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultMQProducer> {
-    private static final Logger log = LoggerFactory.getLogger(EnhancedDefaultMQProducer.class);
     private String producerGroup;
     private String namespace;
     private EnhancedDefaultMQProducer defaultMQProducer;
@@ -62,14 +60,14 @@ public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultM
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
                     defaultMQProducer.shutdown();
-                    log.info("rocketmq - [{}] producer has shutdown gracefully!", namespace);
+                    Loggers.getFrameworkLogger().info("rocketmq - [{}] producer has shutdown gracefully!", namespace);
                 } catch (Exception e) {
-                    log.error("error occurred during rocketmq producer shutdown! pls check! ", e);
+                    Loggers.getFrameworkLogger().error("error occurred during rocketmq producer shutdown! pls check! ", e);
                 }
             }));
-            log.info("rocketmq producer shutdown hook added!");
+            Loggers.getFrameworkLogger().info("rocketmq producer shutdown hook added!");
         } catch (MQClientException e) {
-            log.error("", e);
+            Loggers.getFrameworkLogger().error("", e);
             throw e;
         }
 
@@ -102,12 +100,4 @@ public class RocketMQProducerFactoryBean implements FactoryBean<EnhancedDefaultM
         this.namespace = namespace;
     }
 
-    public void destroy() {
-        try {
-            defaultMQProducer.shutdown();
-            log.info("rocketmq - {} consumer has shutdown gracefully!", namespace);
-        } catch (Exception e) {
-            log.error("", e);
-        }
-    }
 }

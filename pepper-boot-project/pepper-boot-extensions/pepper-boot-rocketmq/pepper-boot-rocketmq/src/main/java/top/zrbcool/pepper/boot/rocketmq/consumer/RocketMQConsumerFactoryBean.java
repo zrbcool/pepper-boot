@@ -11,6 +11,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.Bindable;
 import top.zrbcool.pepper.boot.core.CustomizedPropertiesBinder;
+import top.zrbcool.pepper.boot.core.Loggers;
 import top.zrbcool.pepper.boot.rocketmq.Constants;
 import top.zrbcool.pepper.boot.rocketmq.producer.EnhancedDefaultMQProducer;
 
@@ -19,7 +20,7 @@ import top.zrbcool.pepper.boot.rocketmq.producer.EnhancedDefaultMQProducer;
  * @version 19-12-30
  */
 public class RocketMQConsumerFactoryBean implements FactoryBean<EnhancedDefaultMQPushConsumer>, DisposableBean, BeanNameAware {
-    private static final Logger log = LoggerFactory.getLogger(EnhancedDefaultMQPushConsumer.class);
+    private static final Logger log = Loggers.getFrameworkLogger();
     private String namespace;
     private EnhancedDefaultMQPushConsumer defaultMQPushConsumer;
 
