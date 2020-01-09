@@ -17,7 +17,7 @@
     <properties>
         <spring.boot.version>2.1.7.RELEASE</spring.boot.version>
         <jedis.version>2.9.0</jedis.version>
-        <pepper.metrics.version>1.0.19</pepper.metrics.version>
+        <pepper.metrics.version>1.0.20</pepper.metrics.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <cglib-nodep.version>2.2</cglib-nodep.version>
         <junit.version>4.12</junit.version>
@@ -261,6 +261,11 @@
             <dependency>
                 <groupId>top.zrbcool</groupId>
                 <artifactId>pepper-metrics-motan</artifactId>
+                <version>${pepper.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.zrbcool</groupId>
+                <artifactId>pepper-metrics-thread</artifactId>
                 <version>${pepper.metrics.version}</version>
             </dependency>
             <dependency>
