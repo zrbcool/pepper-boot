@@ -44,8 +44,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/zrbcool/pepper-boot.git</connection>
-        <developerConnection>scm:git:https://github.com/zrbcool/pepper-boot.git</developerConnection>
+        <connection>scm:git:git@github.com:zrbcool/pepper-boot.git</connection>
+        <developerConnection>scm:git:git@github.com:zrbcool/pepper-boot.git</developerConnection>
         <url>http://pepper-boot.zrbcool.top</url>
         <tag>pepper-boot-${project.version}</tag>
     </scm>
