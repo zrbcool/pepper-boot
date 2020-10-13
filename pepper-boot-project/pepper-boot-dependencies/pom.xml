@@ -20,7 +20,7 @@
         <pepper.metrics.version>1.0.22</pepper.metrics.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <cglib-nodep.version>2.2</cglib-nodep.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <com.weibo.motan>1.1.1</com.weibo.motan>
         <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
         <mybatis.version>3.4.5</mybatis.version>
