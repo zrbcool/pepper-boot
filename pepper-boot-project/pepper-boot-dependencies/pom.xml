@@ -23,7 +23,7 @@
         <junit.version>4.12</junit.version>
         <com.weibo.motan>1.1.1</com.weibo.motan>
         <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
-        <mybatis.version>3.4.5</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <mybatis-spring.version>1.3.2</mybatis-spring.version>
         <druid.version>1.1.19</druid.version>
         <rocketmq.client.version>4.3.2</rocketmq.client.version>
