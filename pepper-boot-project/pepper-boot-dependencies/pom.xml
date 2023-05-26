@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
     <url>http://pepper-boot.zrbcool.top</url>
     <properties>
-        <spring.boot.version>2.5.12</spring.boot.version>
+        <spring.boot.version>2.5.15</spring.boot.version>
         <jedis.version>2.9.0</jedis.version>
         <pepper.metrics.version>1.0.22</pepper.metrics.version>
         <commons-lang3.version>3.9</commons-lang3.version>
